@@ -18,7 +18,8 @@ func main() {
 	flag.Parse()
 
 	formats := map[string]formater{
-		"map": toMap,
+		"2d-array": to2dArray,
+		"map":      toMap,
 	}
 
 	f, ok := formats[format]
@@ -32,6 +33,16 @@ func main() {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "    ")
 	enc.Encode(out)
+}
+
+func to2dArray(r io.Reader, args []string) interface{} {
+	sc := bufio.NewScanner(r)
+	lines := make([][]string, 0)
+	for sc.Scan() {
+		parts := strings.Fields(sc.Text())
+		lines = append(lines, parts)
+	}
+	return lines
 }
 
 func toMap(r io.Reader, args []string) interface{} {
