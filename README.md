@@ -1,6 +1,6 @@
 ## printjson
 
-Print shell output to JSON
+Simple script to print shell output into JSON
 
 ## Examples
 
